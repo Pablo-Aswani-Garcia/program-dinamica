@@ -6,13 +6,12 @@
 
 int main(int argc, char* argv[]) {
     std::string directorio = ParseArguments::parse(argc, argv);
-    // Generar instancia aleatoria de prueba
-    std::string instanciaTest = "../tmp/instancia";
-    WriteRandomInstances::generarInstancias(instanciaTest, 10, 20);
+    std::string instancia_test = "../tmp/instancia";
+    WriteRandomInstances::GenerarInstancias(instancia_test, 10, 20);
 
-    for (const auto& entry : std::filesystem::directory_iterator(directorio)) {
-        std::cout << "Ejecutando instancia: " << entry.path().string() << "\n";
-        ExperimentoTSP::ejecutar(entry.path().string());
+    for (const auto& fichero : std::filesystem::directory_iterator(directorio)) {
+        std::cout << "Ejecutando instancia: " << fichero.path().string() << "\n";
+        ExperimentoTSP::Ejecutar(fichero.path().string());
     }
     return 0;
 }

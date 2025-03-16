@@ -2,8 +2,6 @@
 #define FUERZABRUTA_H
 
 #include "../algoritmo.h"
-#include <algorithm>
-#include <climits>
 
 class FuerzaBruta : public Algoritmo {
 public:

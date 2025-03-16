@@ -4,31 +4,31 @@
 #include <vector>
 
 
-void ExperimentoTSP::ejecutar(const std::string& ruta) {
+void ExperimentoTSP::Ejecutar(const std::string& ruta) {
     std::vector<std::string> ciudades;
-    std::vector<std::vector<int>> matriz;
+    std::vector<std::vector<int>> distancias;
 
-    if (!InstanciaTSP::leerInstancia(ruta, ciudades, matriz)) {
+    if (!InstanciaTSP::LeerInstancia(ruta, ciudades, distancias)) {
         std::cerr << "Error al leer instancia.\n";
         return;
     }
-
-    FuerzaBruta fb;
+    
     Voraz voraz;
-    ProgramacionDinamica pd;
-
+    Algoritmo* algoritmo = new FuerzaBruta();
     auto start = std::chrono::high_resolution_clock::now();
-    auto resultado = fb.resolver(matriz, ciudades);
+    auto resultado = algoritmo->resolver(distancias, ciudades);
     auto end = std::chrono::high_resolution_clock::now();
     std::cout << "Fuerza Bruta: " << resultado.second << " en " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "us\n";
 
+    algoritmo = new Voraz();
     start = std::chrono::high_resolution_clock::now();
-    resultado = voraz.resolver(matriz, ciudades);
+    resultado = algoritmo->resolver(distancias, ciudades);
     end = std::chrono::high_resolution_clock::now();
     std::cout << "Voraz: " << resultado.second << " en " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "us\n";
 
+    algoritmo = new ProgramacionDinamica();
     start = std::chrono::high_resolution_clock::now();
-    resultado = pd.resolver(matriz, ciudades);
+    resultado = algoritmo->resolver(distancias, ciudades);
     end = std::chrono::high_resolution_clock::now();
     std::cout << "Programación Dinámica: " << resultado.second << " en " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "us\n";
 }

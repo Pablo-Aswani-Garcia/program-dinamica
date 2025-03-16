@@ -4,33 +4,33 @@
 #include <iostream>
 #include <algorithm>
 
-bool InstanciaTSP::leerInstancia(const std::string& ruta, std::vector<std::string>& ciudades, std::vector<std::vector<int>>& matriz) {
+bool InstanciaTSP::LeerInstancia(const std::string& ruta, std::vector<std::string>& ciudades, std::vector<std::vector<int>>& distancias) {
     std::ifstream file(ruta);
     if (!file) return false;
 
-    int n;
-    file >> n;
-    ciudades.resize(n);
-    matriz.assign(n, std::vector<int>(n, 0));
+    int numero_ciudades;
+    file >> numero_ciudades;
+    ciudades.resize(numero_ciudades);
+    distancias.assign(numero_ciudades, std::vector<int>(numero_ciudades, 0));
 
-    std::string c1, c2;
+    std::string primera_ciudad, segunda_ciudad;
     int distancia;
     int ciudadesLeidas = 0;
-    while (file >> c1 >> c2 >> distancia) {
-        int i = std::find(ciudades.begin(), ciudades.end(), c1) - ciudades.begin();
-        int j = std::find(ciudades.begin(), ciudades.end(), c2) - ciudades.begin();
-        if (i == n) { 
-          ciudades[ciudadesLeidas] = c1;
-          i = ciudadesLeidas;
+    while (file >> primera_ciudad >> segunda_ciudad >> distancia) {
+        int origen = std::find(ciudades.begin(), ciudades.end(), primera_ciudad) - ciudades.begin();
+        int destino = std::find(ciudades.begin(), ciudades.end(), segunda_ciudad) - ciudades.begin();
+        if (origen == numero_ciudades) { 
+          ciudades[ciudadesLeidas] = primera_ciudad;
+          origen = ciudadesLeidas;
           ciudadesLeidas++;
          
         }
-        if (j == n) {
-          ciudades[ciudadesLeidas] = c2;
-          j = ciudadesLeidas;
+        if (destino == numero_ciudades) {
+          ciudades[ciudadesLeidas] = segunda_ciudad;
+          destino = ciudadesLeidas;
           ciudadesLeidas++;
         }
-        matriz[i][j] = matriz[j][i] = distancia;
+        distancias[origen][destino] = distancias[destino][origen] = distancia;
     }
 
     return true;

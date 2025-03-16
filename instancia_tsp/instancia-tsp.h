@@ -6,7 +6,7 @@
 
 class InstanciaTSP {
 public:
-    static bool leerInstancia(const std::string& ruta, std::vector<std::string>& ciudades, std::vector<std::vector<int>>& matriz);
+    static bool LeerInstancia(const std::string& ruta, std::vector<std::string>& ciudades, std::vector<std::vector<int>>& distancias);
 };
 
 #endif

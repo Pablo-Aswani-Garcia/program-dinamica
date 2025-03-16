@@ -5,26 +5,26 @@
 #include <ctime>
 #include <cstdlib>
 
-void WriteRandomInstances::generarInstancias(const std::string& archivoBase, int numCiudades, int numInstancias) {
-    for (int k = 0; k < numInstancias; k++) {
-        std::string archivo = archivoBase + "_" + std::to_string(k + 1) + ".txt";
+void WriteRandomInstances::GenerarInstancias(const std::string& archivo_entrada, int num_ciudades, int num_instancias) {
+    for (int i = 0; i < num_instancias; i++) {
+        std::string archivo = archivo_entrada + "_" + std::to_string(i + 1) + ".txt";
         std::ofstream file(archivo);
         if (!file) {
             std::cerr << "Error al crear el archivo: " << archivo << "\n";
             continue;
         }
 
-        file << numCiudades << "\n";
+        file << num_ciudades << "\n";
         std::vector<std::string> nombresCiudades;
-        for (int i = 0; i < numCiudades; i++) {
+        for (int i = 0; i < num_ciudades; i++) {
             nombresCiudades.push_back("C" + std::to_string(i + 1));
         }
 
-        srand(time(0) + k); // Ensure different seed for each instance
-        for (int i = 0; i < numCiudades; i++) {
-            for (int j = i + 1; j < numCiudades; j++) {
+        srand(time(0) + i); // Ensure different seed for each instance
+        for (int j = 0; j < num_ciudades; j++) {
+            for (int k = j + 1; k < num_ciudades; k++) {
                 int distancia = rand() % 100 + 1;
-                file << nombresCiudades[i] << " " << nombresCiudades[j] << " " << distancia << "\n";
+                file << nombresCiudades[j] << " " << nombresCiudades[k] << " " << distancia << "\n";
             }
         }
         file.close();
