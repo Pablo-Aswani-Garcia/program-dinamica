@@ -3,6 +3,10 @@
 
 #include <string>
 
+/*
+ * Clase que permite pasar los argumentos a un formato entendible para
+ * el programa.
+ */
 class ParseArguments {
 public:
     static std::string parse(int argc, char* argv[]);

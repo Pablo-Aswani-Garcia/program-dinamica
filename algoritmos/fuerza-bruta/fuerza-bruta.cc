@@ -3,6 +3,12 @@
 #include <climits>
 #include <algorithm>
 
+/*
+ * Implementación del algoritmo de fuerza bruta para resolver el problema del TSP.
+ * @param distancias Matriz de distancias entre ciudades.
+ * @param ciudades Vector con los nombres de las ciudades.
+ * @return std::pair<std::vector<std::string>, int> Un par con la mejor ruta y su coste.
+ **/
 std::pair<std::vector<std::string>, int> FuerzaBruta::resolver(const std::vector<std::vector<int>>& distancias, const std::vector<std::string>& ciudades) {
     std::vector<int> permutacion(ciudades.size());
     std::iota(permutacion.begin(), permutacion.end(), 0);

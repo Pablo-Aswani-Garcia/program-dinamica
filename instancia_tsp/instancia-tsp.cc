@@ -4,6 +4,13 @@
 #include <iostream>
 #include <algorithm>
 
+/* 
+  * Lee una instancia del problema del TSP desde un archivo.
+  * @param ruta Ruta del archivo con la instancia.
+  * @param ciudades Vector donde se almacenarán los nombres de las ciudades.
+  * @param distancias Matriz de distancias entre ciudades.
+  * @return bool True si la lectura fue exitosa, false en caso contrario.
+ */
 bool InstanciaTSP::LeerInstancia(const std::string& ruta, std::vector<std::string>& ciudades, std::vector<std::vector<int>>& distancias) {
     std::ifstream file(ruta);
     if (!file) return false;

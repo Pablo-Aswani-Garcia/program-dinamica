@@ -1,11 +1,17 @@
-#include "write-randomized-instances.h"
+#include "escribir_instancias_aleatorias.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <ctime>
 #include <cstdlib>
 
-void WriteRandomInstances::GenerarInstancias(const std::string& archivo_entrada, int num_ciudades, int num_instancias) {
+/*
+ * Genera instancias aleatorias del problema del TSP.
+ * @param archivo_entrada Nombre base del archivo de salida.
+ * @param num_ciudades Número de ciudades de la instancia.
+ * @param num_instancias Número de instancias a generar.
+ **/
+void EscribirInstanciasAleatorias::GenerarInstancias(const std::string& archivo_entrada, int num_ciudades, int num_instancias) {
     for (int i = 0; i < num_instancias; i++) {
         std::string archivo = archivo_entrada + "_" + std::to_string(i + 1) + ".txt";
         std::ofstream file(archivo);

@@ -3,6 +3,10 @@
 #include <climits>
 #include <algorithm>
 
+/*
+ * Implementación del algoritmo voraz para resolver el problema
+ * del TSP.
+ */
 std::pair<std::vector<std::string>, int> Voraz::resolver(const std::vector<std::vector<int>>& transiciones, const std::vector<std::string>& ciudades) {
   int numero_ciudades = ciudades.size();
   std::vector<std::string> ruta;
@@ -13,10 +17,10 @@ std::pair<std::vector<std::string>, int> Voraz::resolver(const std::vector<std::
   ruta.push_back(ciudades[actual]);
   visitados.push_back(actual);
 
-  while (ruta.size() < numero_ciudades) {
+  while (ruta.size() < int(numero_ciudades)) {
     int mejor_coste = INT_MAX;
     int siguiente = -1;
-    for (int i = 0; i < numero_ciudades; ++i) {
+    for (int i = 0; i < int(numero_ciudades); ++i) {
       if (std::find(visitados.begin(), visitados.end(), i) 
           == visitados.end() && transiciones[actual][i] < mejor_coste) {
         mejor_coste = transiciones[actual][i];
