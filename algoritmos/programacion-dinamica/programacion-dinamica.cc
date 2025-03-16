@@ -10,5 +10,5 @@
  * @return std::pair<std::vector<std::string>, int> Un par con la mejor ruta y su coste.
  **/
 std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(const std::vector<std::vector<int>>& transiciones, const std::vector<std::string>& ciudades) {
-
+return {ciudades, 0};
 }

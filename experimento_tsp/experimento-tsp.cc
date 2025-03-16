@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <iomanip>
 
 /* 
  * Ejecuta los algoritmos para resolver el problema del TSP.
@@ -15,26 +16,54 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta) {
         std::cerr << "Error al leer instancia.\n";
         return;
     }
-    
-    Voraz voraz;
+
+    std::cout << "Instancia: " << ruta << "\n";
+
+    // Fuerza Bruta
     Algoritmo* algoritmo = new FuerzaBruta();
     auto start = std::chrono::high_resolution_clock::now();
     auto resultado = algoritmo->resolver(distancias, ciudades);
     auto end = std::chrono::high_resolution_clock::now();
-    std::cout << "Fuerza Bruta: " << resultado.second << " en " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "us\n";
+
+    auto duracion = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    int valor_fuerza_bruta = resultado.second;
+    long tiempo_fuerza_bruta = duracion;
     delete algoritmo;
 
-    algoritmo = new Voraz();
-    start = std::chrono::high_resolution_clock::now();
-    resultado = algoritmo->resolver(distancias, ciudades);
-    end = std::chrono::high_resolution_clock::now();
-    std::cout << "Voraz: " << resultado.second << " en " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "us\n";
-    delete algoritmo;
-
+    // Programación Dinámica
     algoritmo = new ProgramacionDinamica();
     start = std::chrono::high_resolution_clock::now();
     resultado = algoritmo->resolver(distancias, ciudades);
     end = std::chrono::high_resolution_clock::now();
+
+    duracion = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    int valor_programacion_dinamica = resultado.second;
+    long tiempo_programacion_dinamica = duracion;
     delete algoritmo;
-    std::cout << "Programación Dinámica: " << resultado.second << " en " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "us\n";
+
+    // Voraz
+    algoritmo = new Voraz();
+    start = std::chrono::high_resolution_clock::now();
+    resultado = algoritmo->resolver(distancias, ciudades);
+    end = std::chrono::high_resolution_clock::now();
+    duracion = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    int valor_voraz = resultado.second;
+    long tiempo_voraz = duracion;
+    delete algoritmo;
+
+
+    std::cout << " | Instancia";
+    std::cout << " | Valor Fuerza Bruta";
+    std::cout << " | Tiempo Fuerza Bruta (us)";
+    std::cout << " | Valor Prog. Dinámica";
+    std::cout << " | Tiempo Prog. Dinámica (us)";
+    std::cout << " | Valor Voraz";
+    std::cout << " | Tiempo Voraz (us)\n";
+    std::cout << ruta << " | ";
+    std::cout << valor_fuerza_bruta << " | ";
+    std::cout << tiempo_fuerza_bruta << " | ";
+    std::cout << valor_programacion_dinamica << " | ";
+    std::cout << tiempo_programacion_dinamica << " | ";
+    std::cout << valor_voraz << " | ";
+    std::cout << tiempo_voraz << "\n";
 }
