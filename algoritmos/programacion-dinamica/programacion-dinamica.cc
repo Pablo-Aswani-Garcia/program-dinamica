@@ -16,7 +16,8 @@
 std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
   const std::vector<std::vector<int>>& transiciones, 
   const std::vector<std::string>& ciudades) {
-  
+  long accumulated_time = 0;
+  tiempo_limite_ *= 1000; // Convertir a microsegundos
   int num_ciudades = ciudades.size();
   int VISITED_ALL = (1 << num_ciudades) - 1;
   
@@ -33,7 +34,8 @@ std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
   // 0011 -> Ciudad 1 y 2
   // 0101 -> Ciudad 1 y 3
   // se iteran sobre las 2 ^ num_ciudades - 1 ciudades	
-  for (int mask = 1; mask < (1 << num_ciudades); ++mask) {
+  for (int mask = 1; mask < (1 << num_ciudades); ++mask) {    
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     // se itera sobre las ciudades
     for (int ciudad = 0; ciudad < num_ciudades; ++ciudad) {
       // Si la ciudad ya fue visitada
@@ -51,6 +53,12 @@ std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
         }
       }
     }
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    accumulated_time += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+    if (accumulated_time > tiempo_limite_) {
+      break;
+    }
+
   }
   
   // Cálculo del costo mínimo regresando a la ciudad inicial
