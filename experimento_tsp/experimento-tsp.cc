@@ -9,7 +9,8 @@
  * @param ruta Ruta del archivo con la instancia del problema.
  */
 void ExperimentoTSP::Ejecutar(const std::string& ruta) {
-    int tiempo_limite = 10000000; // 10 segundos
+    const int TIEMPO_SEGUNDOS = 30;
+    int tiempo_limite = TIEMPO_SEGUNDOS * 1000000; // 10 segundos
     std::vector<std::string> ciudades;
     std::vector<std::vector<int>> distancias;
 

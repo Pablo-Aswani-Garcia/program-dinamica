@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 #include <chrono>
+#include <iostream>
 
 /* 
  * Implementación del algoritmo de programación dinámica para resolver el problema del TSP.
@@ -17,7 +18,7 @@ std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
   const std::vector<std::vector<int>>& transiciones, 
   const std::vector<std::string>& ciudades) {
   long accumulated_time = 0;
-  tiempo_limite_ *= 1000; // Convertir a microsegundos
+  tiempo_limite_ *= 1000; // Convertir a nanoseconds
   int num_ciudades = ciudades.size();
   int VISITED_ALL = (1 << num_ciudades) - 1;
   
@@ -54,7 +55,7 @@ std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
       }
     }
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    accumulated_time += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+    accumulated_time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin).count();
     if (accumulated_time > tiempo_limite_) {
       break;
     }
@@ -66,6 +67,10 @@ std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
   int ultima_ciudad = -1;
   // se tiene en cuenta que la ciudad 0 es la ciudad de inicio
   // y debe ser la última ciudad a visitar
+  for (auto i: tabla_memoizacion[VISITED_ALL]) {
+    std::cout << i << " ";
+  }
+  std::cout << std::endl;
   for (int i = 1; i < num_ciudades; ++i) {
     if (tabla_memoizacion[VISITED_ALL][i] != INT_MAX) { // Evita sumar INT_MAX
       int costo_actual = tabla_memoizacion[VISITED_ALL][i] + transiciones[i][0];
@@ -83,9 +88,11 @@ std::pair<std::vector<std::string>, int> ProgramacionDinamica::resolver(
   int pos = ultima_ciudad;
   
   for (int i = num_ciudades - 1; i >= 0; --i) {
+    if (pos == -1) {
+      break;
+    }
     ruta[i] = ciudades[pos];
     int next_pos = -1;
-    
     for (int j = 0; j < num_ciudades; ++j) {
       // si j esta en mask y el costo de llegar a pos desde j es igual al costo de llegar a pos desde j
       if ((mask & (1 << j)) && tabla_memoizacion[mask][pos] != INT_MAX &&
