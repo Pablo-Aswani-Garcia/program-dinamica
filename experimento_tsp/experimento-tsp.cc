@@ -8,9 +8,9 @@
  * Ejecuta los algoritmos para resolver el problema del TSP.
  * @param ruta Ruta del archivo con la instancia del problema.
  */
-void ExperimentoTSP::Ejecutar(const std::string& ruta) {
-    const int TIEMPO_SEGUNDOS = 30;
-    int tiempo_limite = TIEMPO_SEGUNDOS * 1000000; // 10 segundos
+void ExperimentoTSP::Ejecutar(const std::string& ruta, const long& tiempo_segundos) {
+    const long NANOSEGUNDOS_A_SEGUNDOS = 1000000;
+    const long tiempo_limite = tiempo_segundos * NANOSEGUNDOS_A_SEGUNDOS; // 1 segundos
     std::vector<std::string> ciudades;
     std::vector<std::vector<int>> distancias;
 

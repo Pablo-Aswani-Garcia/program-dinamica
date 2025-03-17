@@ -12,7 +12,7 @@
 
 class ExperimentoTSP {
 public:
-    static void Ejecutar(const std::string& ruta);
+    static void Ejecutar(const std::string& ruta, const long& tiempo_limite);
 };
 
 #endif
