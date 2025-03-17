@@ -7,7 +7,8 @@
 int main(int argc, char* argv[]) {
     std::string directorio = ParseArguments::parse(argc, argv);
     std::string instancia_test = "../tmp/instancia";
-    EscribirInstanciasAleatorias::GenerarInstancias(instancia_test, 10, 20);
+    const int NUM_CIUDADES = 20;
+    EscribirInstanciasAleatorias::GenerarInstancias(instancia_test, NUM_CIUDADES, 20);
 
     for (const auto& fichero : std::filesystem::directory_iterator(directorio)) {
         std::cout << "Ejecutando instancia: " << fichero.path().string() << "\n";

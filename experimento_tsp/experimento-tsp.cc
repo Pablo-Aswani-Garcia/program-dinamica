@@ -9,6 +9,7 @@
  * @param ruta Ruta del archivo con la instancia del problema.
  */
 void ExperimentoTSP::Ejecutar(const std::string& ruta) {
+    int tiempo_limite = 10000000; // 10 segundos
     std::vector<std::string> ciudades;
     std::vector<std::vector<int>> distancias;
 
@@ -20,7 +21,7 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta) {
     std::cout << "Instancia: " << ruta << "\n";
 
     // Fuerza Bruta
-    Algoritmo* algoritmo = new FuerzaBruta();
+    Algoritmo* algoritmo = new FuerzaBruta(tiempo_limite);
     auto start = std::chrono::high_resolution_clock::now();
     auto resultado = algoritmo->resolver(distancias, ciudades);
     auto end = std::chrono::high_resolution_clock::now();
@@ -31,7 +32,7 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta) {
     delete algoritmo;
 
     // Programación Dinámica
-    algoritmo = new ProgramacionDinamica();
+    algoritmo = new ProgramacionDinamica(tiempo_limite);
     start = std::chrono::high_resolution_clock::now();
     resultado = algoritmo->resolver(distancias, ciudades);
     end = std::chrono::high_resolution_clock::now();
@@ -42,7 +43,7 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta) {
     delete algoritmo;
 
     // Voraz
-    algoritmo = new Voraz();
+    algoritmo = new Voraz(tiempo_limite);
     start = std::chrono::high_resolution_clock::now();
     resultado = algoritmo->resolver(distancias, ciudades);
     end = std::chrono::high_resolution_clock::now();
@@ -61,9 +62,22 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta) {
     std::cout << " | Tiempo Voraz (us)\n";
     std::cout << ruta << " | ";
     std::cout << valor_fuerza_bruta << " | ";
-    std::cout << tiempo_fuerza_bruta << " | ";
+    
+    if (tiempo_fuerza_bruta > tiempo_limite) {
+        std::cout << "TIMEOUT | ";
+    } else {
+        std::cout << tiempo_fuerza_bruta << " | ";
+    }
     std::cout << valor_programacion_dinamica << " | ";
-    std::cout << tiempo_programacion_dinamica << " | ";
+    if (tiempo_programacion_dinamica > tiempo_limite) {
+        std::cout << "TIMEOUT | ";
+    } else {
+        std::cout << tiempo_programacion_dinamica << " | ";
+    }
     std::cout << valor_voraz << " | ";
-    std::cout << tiempo_voraz << "\n";
+    if (tiempo_voraz > tiempo_limite) {
+        std::cout << "TIMEOUT\n";
+    } else {
+        std::cout << tiempo_voraz << "\n";
+    }
 }
