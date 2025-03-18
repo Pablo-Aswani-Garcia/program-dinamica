@@ -16,9 +16,12 @@
 #include <algorithm>
 #include <climits>
 
+
 /**
- * Implementación del algoritmo vorazMedio para resolver el problema
- * del TSP.
+ * @brief Resuelve el problema del TSP mediante un algoritmo vorazMedio.
+ * @param transiciones matriz de distancias entre ciudades.
+ * @param ciudades vector con los nombres de las ciudades.
+ * @return ruta y coste de la solución encontrada.
  */
 std::pair<std::vector<std::string>, int> VorazMedio::resolver(
     const std::vector<std::vector<int>>& transiciones,

@@ -17,8 +17,10 @@
 #include <algorithm>
 
 /**
- * Implementación del algoritmo voraz para resolver el problema
- * del TSP.
+ * @brief Resuelve el problema del TSP mediante un algoritmo voraz.
+ * @param transiciones matriz de distancias entre ciudades.
+ * @param ciudades vector con los nombres de las ciudades.
+ * @return ruta y coste de la solución encontrada.
  */
 std::pair<std::vector<std::string>, int> Voraz::resolver(const std::vector<std::vector<int>>& transiciones, const std::vector<std::string>& ciudades) {
   int numero_ciudades = ciudades.size();

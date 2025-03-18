@@ -21,6 +21,7 @@
 /**
  * Ejecuta los algoritmos para resolver el problema del TSP.
  * @param ruta Ruta del archivo con la instancia del problema.
+ * @param tiempo_segundos Tiempo límite de ejecución en segundos.
  */
 void ExperimentoTSP::Ejecutar(const std::string& ruta,
                               const long& tiempo_segundos) {
