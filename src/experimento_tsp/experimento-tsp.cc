@@ -116,9 +116,9 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta,
   }
   std::cout << valor_voraz << " | ";
   if (tiempo_voraz > tiempo_limite) {
-    std::cout << "TIMEOUT\n";
+    std::cout << "TIMEOUT";
   } else {
-    std::cout << tiempo_voraz << "\n";
+    std::cout << tiempo_voraz << " | ";
   }
 
   std::cout << valor_voraz_medio << " | ";
