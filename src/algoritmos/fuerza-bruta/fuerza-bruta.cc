@@ -1,10 +1,23 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Diseño y Análisis de Algoritmos
+ * Práctica 4 Experimentación con Programación Dinámica
+ *
+ * @author Pablo Aswani García
+ * @since Fri 14 Mar 2025
+ * @brief Definición de la clase FuerzaBruta
+ * @see
+ */
+
 #include "fuerza-bruta.h"
 #include <numeric>
 #include <climits>
 #include <algorithm>
 #include <chrono>
 
-/*
+/**
  * Implementación del algoritmo de fuerza bruta para resolver el problema del TSP.
  * @param distancias Matriz de distancias entre ciudades.
  * @param ciudades Vector con los nombres de las ciudades.

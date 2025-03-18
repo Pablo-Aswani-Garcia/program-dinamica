@@ -1,9 +1,22 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Diseño y Análisis de Algoritmos
+ * Práctica 4 Experimentación con Programación Dinámica
+ *
+ * @author Pablo Aswani García
+ * @since Fri 14 Mar 2025
+ * @brief Definición de la clase Voraz
+ * @see
+ */
+
 #include "voraz.h"
 #include <algorithm>
 #include <climits>
 #include <algorithm>
 
-/*
+/**
  * Implementación del algoritmo voraz para resolver el problema
  * del TSP.
  */
