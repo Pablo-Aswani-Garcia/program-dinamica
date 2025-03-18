@@ -47,6 +47,8 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta,
       std::chrono::duration_cast<std::chrono::microseconds>(end - start)
           .count();
   int valor_fuerza_bruta = resultado.second;
+  auto ruta_fuerza_bruta = resultado.first;
+
   long tiempo_fuerza_bruta = duracion;
   delete algoritmo;
 
@@ -59,6 +61,7 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta,
   duracion = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
                  .count();
   int valor_programacion_dinamica = resultado.second;
+  auto ruta_prog_din = resultado.first;
   long tiempo_programacion_dinamica = duracion;
   delete algoritmo;
 
@@ -66,11 +69,25 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta,
   algoritmo = new Voraz(tiempo_limite);
   start = std::chrono::high_resolution_clock::now();
   resultado = algoritmo->resolver(distancias, ciudades);
+
   end = std::chrono::high_resolution_clock::now();
   duracion = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
                  .count();
   int valor_voraz = resultado.second;
+  auto ruta_voraz = resultado.first;
   long tiempo_voraz = duracion;
+  delete algoritmo;
+
+  // Voraz medio
+  algoritmo = new VorazMedio(tiempo_limite);
+  start = std::chrono::high_resolution_clock::now();
+  resultado = algoritmo->resolver(distancias, ciudades);
+  end = std::chrono::high_resolution_clock::now();
+  duracion = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+                 .count();
+  int valor_voraz_medio = resultado.second;
+  auto ruta_voraz_medio = resultado.first;
+  long tiempo_voraz_medio = duracion;
   delete algoritmo;
 
   std::cout << " | Instancia";
@@ -79,7 +96,10 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta,
   std::cout << " | Valor Prog. Dinámica";
   std::cout << " | Tiempo Prog. Dinámica (us)";
   std::cout << " | Valor Voraz";
-  std::cout << " | Tiempo Voraz (us)\n";
+  std::cout << " | Tiempo Voraz (us)";
+  std::cout << " | Valor Voraz Medio (us)";
+  std::cout << " | Tiempo Voraz Medio (us)";
+  std::cout << "\n";
   std::cout << ruta << " | ";
   std::cout << valor_fuerza_bruta << " | ";
 
@@ -100,4 +120,32 @@ void ExperimentoTSP::Ejecutar(const std::string& ruta,
   } else {
     std::cout << tiempo_voraz << "\n";
   }
+
+  std::cout << valor_voraz_medio << " | ";
+  if (tiempo_voraz_medio > tiempo_limite) {
+    std::cout << "TIMEOUT\n";
+  } else {
+    std::cout << tiempo_voraz_medio << "\n";
+  }
+  std::cout << "Ruta Programación Dinámica: ";
+  for (const auto& ciudad : ruta_prog_din) {
+    std::cout << ciudad << " ";
+  }
+  std::cout << "\n";
+  std::cout << "Ruta Voraz: ";
+  for (const auto& ciudad : ruta_voraz) {
+    std::cout << ciudad << " ";
+  }
+  std::cout << "\n";
+  std::cout << "Ruta Voraz Medio: ";
+  for (const auto& ciudad : ruta_voraz_medio) {
+    std::cout << ciudad << " ";
+  }
+  std::cout << "\n";
+  std::cout << "Ruta Fuerza Bruta: ";
+  for (const auto& ciudad : ruta_fuerza_bruta) {
+    std::cout << ciudad << " ";
+  }
+  std::cout << "\n";
+
 }

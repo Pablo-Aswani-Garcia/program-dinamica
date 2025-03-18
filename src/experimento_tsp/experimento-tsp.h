@@ -6,7 +6,7 @@
  * Práctica 4 Experimentación con Programación Dinámica
  *
  * @author Pablo Aswani García
- * @since Fri 14 Mar 2025 
+ * @since Fri 14 MEar 2025 
  * @brief Declaración de la clase ExperimentoTsp
  * @see 
  */
@@ -18,6 +18,7 @@
 #include "../instancia_tsp/instancia-tsp.h"
 #include "../algoritmos/fuerza-bruta/fuerza-bruta.h"
 #include "../algoritmos/voraz/voraz.h"
+#include "../algoritmos/voraz-medio/voraz-medio.h"
 #include "../algoritmos/programacion-dinamica/programacion-dinamica.h"
 #include <chrono>
 #include <iostream>
